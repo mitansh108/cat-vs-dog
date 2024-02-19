@@ -4,12 +4,11 @@ import flask
 import urllib
 from PIL import Image
 from tensorflow.keras.models import load_model
-from flask_ngrok import run_with_ngrok
+
 from flask import Flask , render_template  , request , send_file
 from tensorflow.keras.preprocessing.image import load_img , img_to_array
 
 app = Flask(__name__)
-run_with_ngrok(app)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model = load_model(os.path.join(BASE_DIR , 'model.hdf5'))
 
@@ -123,6 +122,6 @@ def success():
         return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(debug = False,host = '0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=5001)
 
 
